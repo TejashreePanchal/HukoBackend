@@ -1,10 +1,14 @@
 package com.example.huko.mongoDB.controllers;
 
+import com.example.huko.mongoDB.CustomizedResponse;
 import com.example.huko.mongoDB.models.AuthenticationRequest;
 import com.example.huko.mongoDB.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
 
 @RestController
 @RequestMapping("/authenticate")
@@ -13,13 +17,18 @@ public class AuthenticationController {
     @Autowired
     private UserService userService;
 
+
+
     @PostMapping
     public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
-        String token = String.valueOf(userService.authenticateUser(authenticationRequest.getEmail(), authenticationRequest.getPassword()));
+        String token = userService.authenticateUser(authenticationRequest.getEmail(), authenticationRequest.getPassword());
         if (token != null) {
-            return ResponseEntity.ok(token);
+            var response = new CustomizedResponse<String>("Authentication Successful", Collections.singletonList(token));
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
-            return ResponseEntity.status(401).body("Authentication failed");
+            var response = new CustomizedResponse<String>("Invalid email or password", null);
+            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
     }
+
 }

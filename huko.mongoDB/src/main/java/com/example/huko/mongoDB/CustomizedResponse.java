@@ -1,13 +1,18 @@
 package com.example.huko.mongoDB;
 
-public class CustomizedResponse {
+import java.util.List;
+
+public class CustomizedResponse<T> {
 
     private String message;
-    private Object data;
+    private List<T> body;
 
-    public CustomizedResponse(String message, Object data) {
+    public CustomizedResponse() {
+    }
+
+    public CustomizedResponse(String message, List<T> body) {
         this.message = message;
-        this.data = data;
+        this.body = body;
     }
 
     public String getMessage() {
@@ -18,11 +23,11 @@ public class CustomizedResponse {
         this.message = message;
     }
 
-    public Object getData() {
-        return data;
+    public List<T> getBody() {
+        return body;
     }
 
-    public void setData(Object data) {
-        this.data = data;
+    public void setBody(List<T> body) {
+        this.body = body;
     }
 }
