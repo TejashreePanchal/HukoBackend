@@ -5,5 +5,8 @@
       "src": "Dockerfile",
       "use": "@vercel/docker"
     }
-  ]
+  ],
+  "env": {
+    "DATABASE_URL": "mongodb+srv://Tejashree:Tejashree@cluster0.efbz1eq.mongodb.net/HUKO?retryWrites=true&w=majority&appName=Cluster0"
+  }
 }
