@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 import java.util.Optional;
 
-@CrossOrigin(origins = {"http://localhost:3000", "https://huko-922plfuli-paw-fect.vercel.app"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://huko.vercel.app/home"})
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
