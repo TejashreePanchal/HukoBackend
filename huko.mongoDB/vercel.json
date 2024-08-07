@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "builds": [
     {
       "src": "pom.xml",
@@ -12,7 +11,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/"
+      "dest": "target/classes/META-INF/resources/index.html"
     }
   ]
 }
