@@ -19,7 +19,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/users/register","users/me", "/authenticate", "/movies/search", "/shows/search", "/movies", "/shows").permitAll()
+                        .requestMatchers("/api/users/register", "/api/users/me", "/api/authenticate", "/api/movies/search", "/api/shows/search", "/api/movies", "/api/shows").permitAll()
                         .anyRequest().authenticated()
                 );
         return http.build();
@@ -36,7 +36,7 @@ public class SecurityConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000")
+                        .allowedOrigins("http://localhost:3000", "https://huko-e0kjfg2d3-paw-fect.vercel.app")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
