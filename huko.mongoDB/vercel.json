@@ -1,17 +1,9 @@
 {
+  "version": 2,
   "builds": [
     {
-      "src": "pom.xml",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "target"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "target/classes/META-INF/resources/index.html"
+      "src": "Dockerfile",
+      "use": "@vercel/docker"
     }
   ]
 }
