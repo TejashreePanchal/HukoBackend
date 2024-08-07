@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://huko-922plfuli-paw-fect.vercel.app"})
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
@@ -25,7 +25,6 @@ public class UserController {
         var response = new CustomizedResponse<UserModel>("User registered successfully", Collections.singletonList(newUser));
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
 
     @GetMapping
     public ResponseEntity<CustomizedResponse<UserModel>> getAllUsers() {
@@ -58,6 +57,4 @@ public class UserController {
         var response = new CustomizedResponse<UserModel>("User details", Collections.singletonList(user.get()));
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-
 }
