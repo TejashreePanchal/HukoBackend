@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://huko-e0kjfg2d3-paw-fect.vercel.app"})
 @RestController
-@RequestMapping("/movies")
+@RequestMapping("/api/movies")
 public class MovieController {
 
     private final MovieService service;
