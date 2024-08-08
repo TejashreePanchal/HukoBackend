@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -19,7 +20,13 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/users/register", "/api/users/me", "/api/authenticate", "/api/movies", "/api/shows").permitAll()
+                        .requestMatchers(
+                                new AntPathRequestMatcher("/api/users/register"),
+                                new AntPathRequestMatcher("/api/users/me"),
+                                new AntPathRequestMatcher("/api/authenticate"),
+                                new AntPathRequestMatcher("/api/movies"),
+                                new AntPathRequestMatcher("/api/shows")
+                        ).permitAll()
                         .anyRequest().authenticated()
                 );
         return http.build();
