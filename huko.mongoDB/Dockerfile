@@ -1,24 +1,17 @@
-# Use the official Maven image as the base image
-FROM maven:3.8.5-openjdk-17-slim AS build
+# Use an official Java runtime as a parent image
+FROM openjdk:17-jdk
 
-# Set the working directory inside the container
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the pom.xml file and the source code into the container
-COPY pom.xml .
-COPY src ./src
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-# Build the application
-RUN mvn clean install
+# Package the application
+RUN ./mvnw package
 
-# Use the official OpenJDK image as the base image for the runtime
-FROM openjdk:17-jdk-slim
+# Expose the new port (e.g., 5002)
+EXPOSE 5002
 
-# Set the working directory inside the container
-WORKDIR /app
-
-# Copy the built application from the build stage
-COPY --from=build /app/target/*.jar app.jar
-
-# Specify the entry point for the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Run the application on the new port
+CMD ["java", "-jar", "target/digitalmovie-0.0.1-SNAPSHOT.jar", "--server.port=5002"]
